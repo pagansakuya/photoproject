@@ -1,18 +1,21 @@
 package com.example.photoproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
+import android.widget.ImageView;
 
-public class DrawingView extends View {
+public class DrawingView extends ImageView {
 
 	private Paint paint = new Paint();
 	private Path path = new Path();
+	private Bitmap image;
 	
 	public DrawingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -21,10 +24,13 @@ public class DrawingView extends View {
 		paint.setColor(Color.BLACK);
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setStrokeJoin(Paint.Join.ROUND);
+//		image = Bitmap.createBitmap(src);
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
+		this.setImageBitmap(image);
 		canvas.drawPath(path, paint);
 	}
 	
@@ -50,6 +56,16 @@ public class DrawingView extends View {
 		invalidate();
 
 		return super.onTouchEvent(event);
+	}
+
+	public void setImage(Bitmap image2) {
+		// TODO Auto-generated method stub
+		image = image2;
+	}
+	
+	public Bitmap getModifiedImage(){
+		return this.getDrawingCache();
+		//return image;
 	}
 
 }
