@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -42,15 +43,17 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	
 	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+	protected void onResume() {
 		// TODO Auto-generated method stub
-		super.onRestoreInstanceState(savedInstanceState);
+		super.onResume();
 
 		ImageView imageView = (ImageView) findViewById(R.id.iviewPhoto);
+		DrawActivity window = new DrawActivity();
 		DrawingView view = (DrawingView) findViewById(R.id.view1);
-		imageView.setImageBitmap(view.getModifiedImage());
-
+		if(view == null) Toast.makeText(getApplicationContext(), "chuj", Toast.LENGTH_LONG).show();
+		if(view!=null)imageView.setImageBitmap(view.getModifiedImage());
 	}
 
 }
